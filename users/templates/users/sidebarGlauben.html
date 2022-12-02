@@ -18,68 +18,99 @@
     </head>
     <body>
         <div class="container_sdi_flujo">
-            <h3 class="Vari">SDI ENtrada RO</h3>
+            <br>
+            <h3 class="Vari">SDI Entrada RO</h3>
             <br>
             <div class="graphBox">
-                <div class="box">
-                    <div class="box1">
-                        <span>Variable de entrada</span>
+                <form action="/auth/prediccion/" method="POST">{% csrf_token %}
+                    <div class="box">
+                        <div class="box1">
+                           {% block content %}
+                            <span>Variable de entrada</span>
+                            <hr>
+                            <br>
+                            <span>Temperatura de entrada:
+                            </span><br>
+                            <input
+                                type="number"
+                                step="any"
+                                name="temp"
+                                id="temp"
+                                onkeydown="onlyNumber(event);"
+                                {% if temp %}
+                                placeholder="{{temp}}"
+                                {% else %}
+                                placeholder="Solo números"
+                                {% endif %}
+                                value=""
+                                required/>
+                            
+                            <br>
+                            <br>
+                            <span>Conductividad de permeado:
+                            </span><br>
+                            <input
+                                type="text"
+                                name="conduc"
+                                id="conduc"
+                                onkeydown="onlyNumber(event);"
+                                {% if conduc %}
+                                placeholder="{{conduc}}"
+                                {% else %}
+                                placeholder="Solo números"
+                                {% endif %}
+                                required/>
+                                
+                            <br>
+                            <br>
+                            <span>Diferencial de filtro de cartucho:
+                            </span><br>
+                            <input
+                                type="text"
+                                name="difer"
+                                id="difer"
+                                onkeydown="onlyNumber(event);"
+                                {% if difer %}
+                                placeholder="{{difer}}"
+                                {% else %}
+                                placeholder="Solo números"
+                                {% endif %}
+                                required/>
+                            <br>
+                            <br>
+                            <span>Flujo de alimentación:
+                            </span><br>
+                            <input
+                                type="text"
+                                name="flujoA"
+                                id="flujoA"
+                                onkeydown="onlyNumber(event);"
+                                {% if flujoA %}
+                                placeholder="{{flujoA}}"
+                                {% else %}
+                                placeholder="Solo números"
+                                {% endif %}
+                                required/>
+                                {% endblock content %}
+                            <br>
+                        </div>
+                        <br>
                         <hr>
-                        <br>
-                        <span>Temperatura de entrada:
-                        </span><br>
-                        <input
-                            type="text"
-                            name="temp"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"
-                            value=""/>
-
-                        <br>
-                        <br>
-                        <span>Conductividad de permeado:
-                        </span><br>
-                        <input
-                            type="text"
-                            name="conduc"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"/>
-                        <br>
-                        <br>
-                        <span>Diferencial de filtro de cartucho:
-                        </span><br>
-                        <input
-                            type="text"
-                            name="difer"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"/>
-                        <br>
-                        <br>
-                        <span>Flujo de alimentación:
-                        </span><br>
-                        <input
-                            type="text"
-                            name="flujoA"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"/>
-                        <br>
-                    </div>
-                    <br>
-                    <hr>
-                    <div class="form">
-                        <div class="input-field button">
-                            <input type="submit" value="Calcular">
+                        <div class="form">
+                            <div class="input-field button">
+                                <input type="submit" value="Calcular">
+                            </div>
                         </div>
                     </div>
-                </div>
-
+                </form>
                 <div class="box">
                     <canvas id="myChartSDI"></canvas>
                 </div>
                 <div class="box">
                     <div class="box1">
-                        <span>Valor predcción (SDI):
+                        <span>Valor predicción (SDI):
                         </span>
+                        <p>{{pred}}</p>
                     </div>
 
                 </div>
@@ -256,7 +287,7 @@
                             </a>
                         </li>
                         <li class="list">
-                            <a href="http://127.0.0.1:8000/auth/GlaubenLogin/" class="nav-link">
+                            <a href="{% url 'logout' %}" class="nav-link">
                                 <i class="bx bx-log-out icon"></i>
                                 <span class="link">Logout</span>
                             </a>
