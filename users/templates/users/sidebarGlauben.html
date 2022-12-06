@@ -18,9 +18,7 @@
     </head>
     <body>
         <div class="container_sdi_flujo">
-            <br>
             <h3 class="Vari">SDI Entrada RO</h3>
-            <br>
             <div class="graphBox">
                 <form action="/auth/prediccion/" method="POST">{% csrf_token %}
                     <div class="box">
@@ -103,8 +101,28 @@
                         </div>
                     </div>
                 </form>
+
                 <div class="box">
-                    <canvas id="myChartSDI"></canvas>
+                    <div class="box1">
+                        <span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="box">
+                    <div class="box1">
+                        <span>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="box">
+                    <div class="box1">
+                        <span>El tipo de operación de la planta es:
+                        </span>
+                        <p>{{estadoOp}}</p>
+                    </div>
+
                 </div>
                 <div class="box">
                     <div class="box1">
@@ -114,118 +132,9 @@
                     </div>
 
                 </div>
-                <div class="box">
-                    <div class="box1">
-                        <span>El rendimiento de la planta es:
-                        </span>
-                    </div>
-
-                </div>
 
             </div>
-            <br>
-            <h3 class="Vari">Flujo Normalizado</h3>
-            <br>
-            <div class="graphBox">
-                <div class="box">
-                    <div class="box1">
-                        <span>Variable de entrada</span>
-                        <hr>
-                        <br>
-                        <span>Temperatura de entrada:
-                        </span><br>
-                        <input
-                            type="text"
-                            name="temp"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"
-                            value=""/>
-
-                        <br>
-                        <br>
-                        <span>Flujo de rechazo:
-                        </span><br>
-                        <input
-                            type="text"
-                            name="conduc"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"/>
-                        <br>
-                        <br>
-                        <span>Presión de entrada:
-                        </span><br>
-                        <input
-                            type="text"
-                            name="difer"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"/>
-                        <br>
-                        <br>
-                        <span>Conductividad de entrada:
-                        </span><br>
-                        <input
-                            type="text"
-                            name="flujoA"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"/>
-                        <br> 
-                        <br> 
-                        <hr>                      
-                        <br>
-                        <span>Caudal Nominal:
-                        </span><br>
-                        <input
-                            type="text"
-                            name="difer"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"/>
-
-                        <br>
-                        <span>Flujo de Permeado (Caudal de Operación):
-                        </span><br>
-                        <input
-                            type="text"
-                            name="flujoA"
-                            onkeydown="onlyNumber(event);"
-                            placeholder="Solo numeros"/>
-                        <br>
-                    </div>
-
-                    <br>
-                    <hr>
-                    <div class="form">
-                        <div class="input-field button">
-                            <input type="submit" value="Calcular">
-                        </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <canvas id="myChartSDI"></canvas>
-                </div>
-                <div class="box">
-                    <canvas id="myChart"></canvas>
-
-                </div>
-                <div class="box">
-                    <div class="box1">
-                        <span>Valor predicción FN (m3/h):
-                        </span>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box1">
-                        <span>Rendimiento con respecto a Caudal Nominal (%):
-                        </span>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="box1">
-                        <span>Rendimiento con respecto a Caudal Operacional (%):
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
+            
 
         <nav>
             <div class="logo">
@@ -267,7 +176,13 @@
                         <li class="list">
                             <a href="#" class="nav-link">
                                 <i class="bx bx-pie-chart-alt-2 icon"></i>
-                                <span class="link" id="submit">Analisis</span>
+                                <span class="link" id="submit">Predicción SDI</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="{% url 'FNsidebarGlauben' %}" class="nav-link">
+                                <i class="bx bx-pie-chart-alt-2 icon"></i>
+                                <span class="link" id="submit">Predicción FN</span>
                             </a>
                         </li>
                         <li class="list">

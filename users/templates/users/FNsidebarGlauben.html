@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <link rel="icon" href="{% static 'images/images.jpg' %}" type="image/icon type">
+        <!-- CSS -->
+
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+        <!-- Boxicons CSS -->
+        <link
+            href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css"
+            rel="stylesheet"/>
+    </head>
+    <body>
+        <div class="container_sdi_flujo">
+            <h3 class="Vari">Flujo Normalizado</h3>
+            <div class="graphBox">
+                <form action="/auth/prediccionFN/" method="POST">{% csrf_token %}
+                    <div class="box">
+                        <div class="box1">
+                            <span>Variable de entrada</span>
+                            <hr>
+                            <br>
+                            <span>Temperatura de entrada:
+                            </span><br>
+                            <input
+                                    type="number"
+                                    step="any"
+                                    name="temp"
+                                    id="temp"
+                                    onkeydown="onlyNumber(event);"
+                                    {% if temp %}
+                                    placeholder="{{temp}}"
+                                    {% else %}
+                                    placeholder="Solo números"
+                                    {% endif %}
+                                    value=""
+                                    required/>
+
+                            <br>
+                            <br>
+                            <span>Flujo de rechazo:
+                            </span><br>
+                            <input
+                                type="text"
+                                id="flujoR"
+                                name="flujoR"
+                                onkeydown="onlyNumber(event);"
+                                {% if flujoR %}
+                                placeholder="{{flujoR}}"
+                                {% else %}
+                                placeholder="Solo números"
+                                {% endif %}
+                                required/>
+                            <br>
+                            <br>
+                            <span>Presión de entrada:
+                            </span><br>
+                            <input
+                                type="text"
+                                id="presion"
+                                name="presion"
+                                onkeydown="onlyNumber(event);"
+                                {% if presion %}
+                                placeholder="{{presion}}"
+                                {% else %}
+                                placeholder="Solo números"
+                                {% endif %}
+                                required/>
+                            <br>
+                            <br>
+                            <span>Conductividad de entrada:
+                            </span><br>
+                            <input
+                                type="text"
+                                name="conduc"
+                                id="conduc"
+                                onkeydown="onlyNumber(event);"
+                                {% if conduc %}
+                                placeholder="{{conduc}}"
+                                {% else %}
+                                placeholder="Solo números"
+                                {% endif %}
+                                required/>
+                            <br> 
+                            <br> 
+                            <hr>                      
+                            <br>
+                            <span>Caudal Nominal:
+                            </span><br>
+                            <input
+                                type="text"
+                                name="caudalNom"
+                                id="caudalNom"
+                                onkeydown="onlyNumber(event);"
+                                {% if caudalNom %}
+                                placeholder="{{caudalNom}}"
+                                {% else %}
+                                placeholder="Solo números"
+                                {% endif %}
+                                required/>
+
+                            <br>
+                            <span>Flujo de Permeado (Caudal de Operación):
+                            </span><br>
+                            <input
+                                type="text"
+                                name="flujoPerm"
+                                id="flujoPerm"
+                                onkeydown="onlyNumber(event);"
+                                {% if flujoPerm %}
+                                placeholder="{{flujoPerm}}"
+                                {% else %}
+                                placeholder="Solo números"
+                                {% endif %}
+                                required/>
+                            <br>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <div class="form">
+                            <div class="input-field button">
+                                <input type="submit" value="Calcular">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="box">
+                    <canvas id="myChartSDI"></canvas>
+                </div>
+                <div class="box">
+                    <canvas id="myChart"></canvas>
+
+                </div>
+                <div class="box">
+                    <div class="box1">
+                        <span>Valor predicción FN (m3/h):
+                        </span>
+                        <p>{{pred}}</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box1">
+                        <span>Rendimiento con respecto a Caudal Nominal (%):
+                        </span>
+                        <p>{{perfomance}}</p>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box1">
+                        <span>Rendimiento con respecto a Caudal Operacional (%):
+                        </span>
+                        <p>{{perfomance2}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav>
+            <div class="logo">
+                <i class="bx bx-menu menu-icon"></i>
+                <span class="logo-name">Glauben Ecology</span>
+            </div>
+            <div class="sidebar">
+                <div class="logo">
+                    <i class="bx bx-menu menu-icon"></i>
+                    <span class="logo-name">Glauben Ecology</span>
+                </div>
+
+                <div class="sidebar-content">
+                    <ul class="lists">
+                        <li class="list">
+                            <a href="#" class="nav-link">
+                                <i class="bx bx-home-alt icon"></i>
+                                <span class="link">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="nav-link">
+                                <i class="bx bx-bar-chart-alt-2 icon"></i>
+                                <span class="link">Resumen</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="nav-link">
+                                <i class="bx bx-bell icon"></i>
+                                <span class="link">Notificaciones</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="nav-link">
+                                <i class="bx bx-message-rounded icon"></i>
+                                <span class="link">Mensajes</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="{% url 'sidebarGlauben' %}" class="nav-link">
+                                <i class="bx bx-pie-chart-alt-2 icon"></i>
+                                <span class="link" id="submit">Predicción SDI</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="nav-link">
+                                <i class="bx bx-pie-chart-alt-2 icon"></i>
+                                <span class="link" id="submit">Predicción FN</span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="#" class="nav-link">
+                                <i class="bx bx-folder-open icon"></i>
+                                <span class="link">Archivos</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="bottom-cotent">
+                        <li class="list">
+                            <a href="#" class="nav-link">
+                                <i class="bx bx-cog icon"></i>
+                                <span class="link">Configuraciones
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list">
+                            <a href="{% url 'logout' %}" class="nav-link">
+                                <i class="bx bx-log-out icon"></i>
+                                <span class="link">Logout</span>
+                            </a>
+                        </li>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+        <section class="overlay"></section>
+        <script>
+            function onlyNumber(event) {
+                var key = event.key;
+                if ((key >= 0 && key < 10) || key == 'Backspace' || key == '.') {
+                    return true;
+                } else {
+                    event.preventDefault();
+                }
+            }
+        </script>
+
+        <script src="{% static 'js/script.js'%}"></script>
+        <script src="{% static 'js/chart.min.js' %}"></script>
+        <script src="{% static 'js/mychart.js' %}"></script>
+
+    </body>
+</html>
